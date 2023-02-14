@@ -4,6 +4,25 @@ const multer  = require('multer');
 const path = require('path');
 
 
+ 
+function fileFilter (req, file, callback) {
+
+
+    try {
+
+        const acceptedExtension = ['.jpg','.png', '.gif', '.webp', '.bmp'];
+         const fileExtension = path.extname(file.originalname).toLocaleLowerCase();
+         console.log(fileExtension);
+         callback(null, acceptedExtension.includes(fileExtension));
+
+    }catch(error){
+
+            callback(error);
+    }
+
+
+}
+
 
 const uploadPath =  path.join(process.cwd() , "public",  "profile_pic");
 
@@ -14,8 +33,15 @@ const storage =  multer.diskStorage({
     filename: function(req, file, callback){
         callback(null, Date.now()+path.extname(file.originalname))
     }
-})
-const uploads = multer({ storage:storage});
+});
+
+const uploads = multer({ 
+    storage:storage,
+    limits:{
+        fieldSize: 2*1024 *1024,
+    },
+    fileFilter:fileFilter
+});
 
 
 
