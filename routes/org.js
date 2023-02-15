@@ -56,4 +56,6 @@ router.put('/update/:id', update);
 router.delete('/delete/:id', deleteUser);
 router.put('/upload/:id/profilePic', uploads.single('profilePic'),upload)
 
+router.post('/login', require('../auth/token'));
+
 module.exports = router;
