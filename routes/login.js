@@ -1,12 +1,12 @@
 
-const app = require('express')
-const router = app.Router();
+// const app = require('express')
+// const router = app.Router();
 
 
 
-// authenticate the user and generate a token
+// // authenticate the user and generate a token
 
-router.post('/login', require('../auth/token'));
+// router.post('/login', require('../auth/token'));
 
 
-module.exports = router;
+// module.exports = router;
