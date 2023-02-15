@@ -3,7 +3,7 @@ require('dotenv');
 
 
  
-const secret =  process.env.SECRET || "tm7kT2*`IkG_%'k";
+const secret =  process.env.SECRET || "@nm=%0vx1eqka!f@n3x(vf9+x-o%uh6=7+xpu2fgt4^t9l=wsu4#";
  const user  =  "raushan@gmail.com";
  const password = "123"
 

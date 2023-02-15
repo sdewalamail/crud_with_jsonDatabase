@@ -64,7 +64,8 @@ const searchUerById = async (req, res) => {
       res.send("Can please enter correct name or user not find :( ");
     }
 
-    console.log(searchOrg);
+    // console.log(searchOrg);
+
     res.json(searchOrg);
   } catch (error) {
     console.log(error);
@@ -136,7 +137,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-/////////////////////////////////////////User upload///////////////////////////////
+/////////////////////////////////////////User upload Profile pic ///////////////////////////////
 
 const upload = async (req, res) => {
   try {
@@ -149,12 +150,10 @@ const upload = async (req, res) => {
     // check extension
 
     if (!req.file) {
-      return res
-        .status(400)
-        .json({
-          description:
-            "please give an appropriate image formate.eg ['.jpg','.png', '.gif', '.webp', '.bmp']",
-        });
+      return res.status(400).json({
+        description:
+          "please give an appropriate image formate.eg ['.jpg','.png', '.gif', '.webp', '.bmp']",
+      });
     }
 
     // Find the item to upload
@@ -162,27 +161,23 @@ const upload = async (req, res) => {
 
     // if given user doesn't exists the rm remove the uploaded image
     if (itemIndex === -1) {
-      await fs.rm(path.join(process.cwd(), "public/profile_pic"));
+      await fs.rm(
+        path.join(process.cwd(), "public", "profile_pic", req.file.filename)
+      );
       return res.status(404).json({ description: "User not found" });
     }
 
     // if user have already set the profilePic then remove the previous and upload the new pic logic
 
-     
     try {
-
       if (json[itemIndex].profile_pic) {
         await fs.rm(path.join(process.cwd(), json[itemIndex].profile_pic));
       }
-      
     } catch (error) {
-
-      if(!(error.code === "ENOENT")) {
+      if (!(error.code === "ENOENT")) {
         throw error;
       }
-      
     }
-    
 
     const updatedOrg = {
       ...json[itemIndex],

@@ -9,7 +9,8 @@ module.exports = (req, res, next) => {
 
   // if user is genrating the token then don't do anyting
   
-     console.log(req.path.endsWith('login'));
+    //  console.log(req.path.endsWith('login'));
+    
    if(req.path.endsWith('login')){
  
       next();
